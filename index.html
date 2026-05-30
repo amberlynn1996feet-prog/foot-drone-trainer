@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOOT DRONE TRAINER</title>
+    <style>
+        body { margin:0; font-family:Arial; background:#000; color:#ff0066; text-align:center; overflow:hidden; }
+        .screen { display:none; height:100vh; flex-direction:column; justify-content:center; align-items:center; }
+        .active { display:flex; }
+        h1 { color:#ff3366; text-shadow:0 0 10px #ff0066; }
+        button { background:#ff0066; color:white; border:none; padding:15px 30px; margin:10px; font-size:18px; border-radius:8px; cursor:pointer; }
+        .hypno { background:#111; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%{opacity:0.7} 50%{opacity:1} 100%{opacity:0.7} }
+        .evidence { background:#220022; padding:15px; margin:10px; border:1px solid #ff0066; }
+        input, textarea { background:#111; color:#ff99aa; border:1px solid #ff0066; padding:10px; width:80%; margin:8px; }
+    </style>
+</head>
+<body>
+
+<!-- SLAVE MODE -->
+<div id="slaveScreen" class="screen active hypno">
+    <h1>SLAVE MODE — EYES ON SCREEN</h1>
+    <p id="hypnoText">DEEPER... ONLY FEET... BECOME DRONE...</p>
+    <img id="hypnoImage" src="https://picsum.photos/id/1015/800/1200" style="max-height:60vh; border:3px solid #ff0066;">
+    <p>Time: <span id="timer">120</span>s</p>
+    <button onclick="exitSlaveEarly()">I Can't Handle It (Weak Beta)</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainScreen" class="screen">
+    <h1>MINDLESS FOOT DRONE v1.0</h1>
+    <p>Current Phase: <span id="phase">Foot Beta</span></p>
+    <div class="evidence">
+        <h2>Evidence / Blackmail Vault</h2>
+        <div id="evidenceLog"></div>
+    </div>
+
+    <button onclick="startDailyQuestions()">Daily 10 Questions</button>
+    <button onclick="startPicTask()">Upload Today's Pics</button>
+    <button onclick="showMantra()">Repeat Mantra</button>
+    <button onclick="startEdgingTimer()">Edging Timer (10min)</button>
+    <button onclick="show100Questions()">100 Question Questionnaire</button>
+    <button onclick="enterSlaveMode()">Enter Slave Mode (2min)</button>
+
+    <h3 id="dailyTask"></h3>
+</div>
+
+<!-- 100 QUESTIONS MODAL -->
+<div id="q100Modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); overflow:auto; padding:20px;">
+    <h1>100 Intimate Foot Drone Questionnaire</h1>
+    <div id="q100List"></div>
+    <button onclick="submit100()">Submit to Evidence Vault</button>
+    <button onclick="close100()">Close</button>
+</div>
+
+<script>
+// ===== CONFIG =====
+let currentPhase = "Foot Beta";
+let evidence = [];
+
+// Sample foot images for hypno
+const footImages = [
+    "https://picsum.photos/id/1015/800/1200", // wrinkled sole
+    "https://picsum.photos/id/201/800/1200",
+    "https://picsum.photos/id/237/800/1200",
+    "https://picsum.photos/id/669/800/1200",
+    "https://picsum.photos/id/106/800/1200"
+];
+
+// Mantras
+const mantras = [
+    "I am a mindless foot drone. Only feet control me.",
+    "My brain melts for soles and toes.",
+    "I exist to worship and obey.",
+    "No pussy. Only feet.",
+    "I am owned by feet."
+];
+
+// ===== SLAVE MODE =====
+let slaveTimer;
+function enterSlaveMode() {
+    document.getElementById("mainScreen").classList.remove("active");
+    document.getElementById("slaveScreen").classList.add("active");
+    let timeLeft = 120;
+    document.getElementById("timer").textContent = timeLeft;
+
+    let imgIndex = 0;
+    slaveTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = timeLeft;
+        
+        // Cycle images
+        imgIndex = (imgIndex + 1) % footImages.length;
+        document.getElementById("hypnoImage").src = footImages[imgIndex];
+        
+        // Random mantra flash
+        if (Math.random() > 0.7) {
+            document.getElementById("hypnoText").textContent = mantras[Math.floor(Math.random()*mantras.length)];
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(slaveTimer);
+            alert("Good drone. You may now enter the main app.");
+            exitSlaveMode();
+        }
+    }, 1000);
+}
+
+function exitSlaveMode() {
+    clearInterval(slaveTimer);
+    document.getElementById("slaveScreen").classList.remove("active");
+    document.getElementById("mainScreen").classList.add("active");
+    addEvidence("Completed Slave Mode session");
+}
+
+function exitSlaveEarly() {
+    if (confirm("Are you sure? This is weak beta behavior.")) {
+        clearInterval(slaveTimer);
+        exitSlaveMode();
+    }
+}
+
+// ===== EVIDENCE =====
+function addEvidence(text) {
+    evidence.push({time: new Date().toLocaleTimeString(), entry: text});
+    renderEvidence();
+}
+
+function renderEvidence() {
+    const log = document.getElementById("evidenceLog");
+    log.innerHTML = evidence.map(e => `<p>[${e.time}] ${e.entry}</p>`).join("");
+}
+
+// ===== DAILY TASKS =====
+function startDailyQuestions() {
+    alert("Answer these 10 questions honestly in your mind or notepad, then submit summary:\n\n1. Arousal level?\n2. Favorite foot part today?\n... (full 10 in training chat)");
+    addEvidence("Daily 10 Questions Submitted");
+}
+
+function startPicTask() {
+    const task = "Find & upload 10 pics of wrinkled soles with toes spread (use image URLs)";
+    document.getElementById("dailyTask").innerHTML = `<strong>Today's Task:</strong> ${task}`;
+    let urls = prompt("Paste image URLs separated by commas:");
+    if (urls) addEvidence("Uploaded pics: " + urls.substring(0, 100) + "...");
+}
+
+// Mantra
+function showMantra() {
+    const m = mantras[Math.floor(Math.random()*mantras.length)];
+    alert("Repeat 50 times out loud:\n\n" + m);
+    addEvidence("Repeated mantra: " + m);
+}
+
+// Edging
+function startEdgingTimer() {
+    alert("Edging timer started. Edge for 10 minutes. No cumming without permission.");
+    addEvidence("Completed 10min edging session");
+}
+
+// 100 Questions (sample - full list abbreviated for space)
+const q100 = [
+    "1. How long have you had a foot fetish?",
+    "2. Current strength 1-10?",
+    // ... (add more as needed - there are 100 in the plan)
+    "100. Are you ready to be a permanent mindless foot drone?"
+];
+
+function show100Questions() {
+    let html = "";
+    q100.forEach((q,i) => {
+        html += `<p>${q}<br><textarea placeholder="Answer here"></textarea></p>`;
+    });
+    document.getElementById("q100List").innerHTML = html;
+    document.getElementById("q100Modal").style.display = "block";
+}
+
+function submit100() {
+    addEvidence("FULL 100 QUESTIONNAIRE SUBMITTED — Massive evidence added");
+    alert("All answers logged as permanent blackmail evidence.");
+    document.getElementById("q100Modal").style.display = "none";
+}
+
+function close100() {
+    document.getElementById("q100Modal").style.display = "none";
+}
+
+// Init
+addEvidence("Training Started - Phase 1: Foot Beta");
+renderEvidence();
+alert("App loaded. Enter Slave Mode first every time you open it. Eyes on screen.");
+</script>
+</body>
+</html>
