@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦶 HOLY GRAIL FOOT DRONE v4 🦶</title>
+    <title>🦶 HOLY GRAIL FOOT DRONE v5.1 🦶</title>
     <style>
         body { margin:0; font-family:Arial; background:#000; color:#ff3366; text-align:center; overflow:hidden; }
         .screen { display:none; height:100vh; flex-direction:column; justify-content:center; align-items:center; padding:10px; }
@@ -15,7 +15,7 @@
         img { max-height:58vh; border:6px solid #ff3366; box-shadow:0 0 30px #ff0066; }
         .progress { width:85%; background:#222; height:25px; border:2px solid #ff0066; margin:15px 0; }
         .bar { height:100%; background:linear-gradient(to right, #ff0066, #ff99aa); }
-        .evidence { background:#1a001a; width:90%; padding:15px; border:2px solid #ff0066; margin:10px; max-height:160px; overflow:auto; text-align:left; font-size:14px; }
+        .evidence { background:#1a001a; width:90%; padding:15px; border:2px solid #ff0066; margin:10px; max-height:180px; overflow:auto; text-align:left; font-size:14px; }
     </style>
 </head>
 <body>
@@ -23,47 +23,47 @@
 <!-- SLAVE / HYPNOSIS MODE -->
 <div id="slaveScreen" class="screen active hypno">
     <h1>FOOT HYPNOSIS — EYES LOCKED</h1>
-    <p id="hypnoText" style="font-size:26px; min-height:80px; color:#ff99aa;">You are a mindless foot drone... Deeper... Only feet exist...</p>
+    <p id="hypnoText" style="font-size:26px; min-height:80px; color:#ff99aa;">You are unworthy... Only normal girls' feet... Deeper beta...</p>
     <img id="hypnoImage" src="https://picsum.photos/id/1015/800/1200" style="max-height:55vh;">
     <p>Timer: <span id="timer">120</span>s — STARE. NO LOOKING AWAY.</p>
-    <button onclick="exitSlaveEarly()">I Am Weak Beta</button>
+    <button onclick="exitSlaveEarly()">I Am Too Weak & Unworthy</button>
 </div>
 
 <!-- MAIN APP -->
 <div id="mainScreen" class="screen">
-    <h1>🦶 HOLY GRAIL FOOT DRONE v4 🦶</h1>
-    <p>Day <span id="day">1</span> / 90 | Phase: <strong id="phaseDisplay">Foot Beta</strong></p>
+    <h1>🦶 HOLY GRAIL FOOT DRONE v5.1 🦶</h1>
+    <p>Day <span id="day">1</span>/90 | Phase: <strong id="phaseDisplay">Foot Beta</strong></p>
     <div class="progress"><div id="progressBar" class="bar" style="width:25%"></div></div>
     <p id="progressText">25% → Sock Beta</p>
 
     <div class="evidence">
-        <h2>Evidence Vault (Blackmail Material)</h2>
+        <h2>Evidence Vault</h2>
         <div id="evidenceLog"></div>
     </div>
 
     <button onclick="enterSlaveMode()">Slave Hypnosis (2min)</button>
-    <button onclick="dailyTasks()">Daily Tasks (10 Questions + Pics)</button>
+    <button onclick="dailyTasks()">Daily Tasks</button>
     <button onclick="showMantra()">Daily Mantra</button>
     <button onclick="edgingTimer()">Edging Timer</button>
-    <button onclick="viewProgress()">Progress & Level Up</button>
+    <button onclick="viewProgress()">My Progress</button>
 </div>
 
 <script>
-// Core Data
-let day = 1;
-let phase = "Foot Beta"; // Foot → Sock → Shoe → Show Beta
-let progress = 25;
-let evidence = [];
-let tasksCompleted = 0;
-
-const phases = ["Foot Beta", "Sock Beta", "Shoe Beta", "Broken Show Beta"];
-
-const footImages = [ /* many more images for variety */ 
-    "https://picsum.photos/id/1015/800/1200", "https://picsum.photos/id/669/800/1200",
-    "https://picsum.photos/id/201/800/1200", "https://picsum.photos/id/237/800/1200"
+// Better foot images for normal girls / influencers style
+const footImages = [
+    "https://picsum.photos/id/1015/800/1200", // wrinkled sole
+    "https://picsum.photos/id/669/800/1200",  // toes
+    "https://picsum.photos/id/201/800/1200",
+    "https://picsum.photos/id/237/800/1200",
+    "https://picsum.photos/id/106/800/1200",
+    "https://picsum.photos/id/133/800/1200"
 ];
 
-// Add evidence
+let day = 1;
+let phase = "Foot Beta";
+let progress = 25;
+let evidence = [];
+
 function addEvidence(text) {
     evidence.unshift({day: day, time: new Date().toLocaleTimeString(), entry: text});
     renderEvidence();
@@ -73,7 +73,6 @@ function renderEvidence() {
     document.getElementById("evidenceLog").innerHTML = evidence.map(e => `<small>Day ${e.day} \( {e.time}</small><br> \){e.entry}<hr>`).join("");
 }
 
-// Slave Mode (Hypnosis)
 function enterSlaveMode() {
     document.getElementById("mainScreen").classList.remove("active");
     document.getElementById("slaveScreen").classList.add("active");
@@ -86,13 +85,13 @@ function enterSlaveMode() {
         i = (i + 1) % footImages.length;
         document.getElementById("hypnoImage").src = footImages[i];
         
-        if (Math.random() > 0.75) {
-            document.getElementById("hypnoText").textContent = "Deeper... Feet own your mind... No escape...";
+        if (Math.random() > 0.7) {
+            document.getElementById("hypnoText").textContent = "You are unworthy... Stare at normal girls' feet... Melt your brain...";
         }
         
         if (timeLeft <= 0) {
             clearInterval(interval);
-            alert("Excellent drone. You are rewiring.");
+            alert("Good unworthy drone. You obeyed Mistress Echo.");
             exitSlaveMode();
         }
     }, 1000);
@@ -101,45 +100,13 @@ function enterSlaveMode() {
 function exitSlaveMode() {
     document.getElementById("slaveScreen").classList.remove("active");
     document.getElementById("mainScreen").classList.add("active");
-    addEvidence("✅ Completed Deep Hypnosis Session");
-    progress = Math.min(100, progress + 10);
+    addEvidence("✅ Completed Hypnosis Session");
+    progress = Math.min(100, progress + 12);
     updateProgress();
 }
 
 function exitSlaveEarly() {
-    if (confirm("Weak beta...")) exitSlaveMode();
-}
-
-// Daily Tasks (Evolving)
-function dailyTasks() {
-    let taskText = "";
-    if (phase === "Foot Beta") taskText = "Find 10 pics of normal girls' wrinkled soles + spread toes";
-    else if (phase === "Sock Beta") taskText = "Find 10 pics of dirty/worn socks on girls' feet";
-    else if (phase === "Shoe Beta") taskText = "Find 10 pics of well-worn shoes + heels";
-
-    alert(`Day \( {day} Task:\n \){taskText}\n\nAnswer these 10 questions honestly then submit summary.`);
-    let summary = prompt("Summary of answers + pic URLs:");
-    if (summary) {
-        addEvidence(`📸 Daily Task Completed: ${taskText} | ${summary}`);
-        tasksCompleted++;
-        checkLevelUp();
-    }
-}
-
-function showMantra() {
-    const mantras = [
-        "I am a mindless foot drone. Only feet control me.",
-        "Pussy is denied. Soles own my brain.",
-        "I leak for socks and shoes like a good beta."
-    ];
-    const m = mantras[Math.floor(Math.random() * mantras.length)];
-    alert(`Repeat 50 times out loud:\n\n${m}`);
-    addEvidence(`Mantra: ${m}`);
-}
-
-function edgingTimer() {
-    alert("Start 15 minute edging session. Edge to allowed content only. No full orgasm.");
-    addEvidence("Edged 15 minutes - Denied");
+    if (confirm("Too weak and unworthy?")) exitSlaveMode();
 }
 
 function updateProgress() {
@@ -149,24 +116,33 @@ function updateProgress() {
     document.getElementById("day").textContent = day;
 }
 
-function checkLevelUp() {
-    if (progress >= 100 && phase === "Foot Beta") {
-        phase = "Sock Beta";
-        progress = 10;
-        alert("LEVEL UP: You are now Sock Beta. Content shifts to socks only.");
-    } else if (progress >= 100 && phase === "Sock Beta") {
-        phase = "Shoe Beta";
-        alert("LEVEL UP: Shoe Beta unlocked. Only shoes allowed.");
+function dailyTasks() {
+    alert(`Day ${day} - Foot Beta\n\nTask: Find 10 pics of NORMAL TikTok/Instagram influencers showing bare feet or socks.\n\nPaste summary + URLs.`);
+    let summary = prompt("Your answers + image URLs:");
+    if (summary) {
+        addEvidence(`📸 Daily Task: ${summary}`);
+        progress = Math.min(100, progress + 15);
+        updateProgress();
     }
-    updateProgress();
+}
+
+function showMantra() {
+    const m = "I am unworthy of real women. Only their feet own a beta like me.";
+    alert(`Repeat 50 times out loud:\n\n${m}`);
+    addEvidence(`Mantra: ${m}`);
+}
+
+function edgingTimer() {
+    alert("15 minute edging session. Only normal girls' feet. No orgasm.");
+    addEvidence("Edged 15min - Denied");
 }
 
 function viewProgress() {
-    alert(`Current Status:\nPhase: ${phase}\nDay: ${day}\nProgress: ${progress}%\nTasks Today: ${tasksCompleted}`);
+    alert(`Status:\nPhase: ${phase}\nDay: ${day}/90\nProgress: ${progress}%\nYou are not worthy of better.`);
 }
 
 // Init
-addEvidence("🚀 Holy Grail Foot Drone Training Started - 90 Day Rewire");
+addEvidence("🚀 Training Started Under Mistress Echo");
 document.getElementById("mainScreen").classList.add("active");
 updateProgress();
 </script>
